@@ -1,11 +1,25 @@
-.TodoList {
+.ProductsList {
   width: 100%;
 
   &__user-button--selected {
     background-color: #4d457b;
   }
 
+  &__card {
+    margin: 10px;
+  }
+
+  &__image {
+    object-fit: cover;
+    width: 100%;
+    max-width: 268px;
+    height: 268px;
+  }
+
   &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     list-style: none;
     padding-left: 5px;
   }
@@ -28,4 +42,10 @@
     background-color: #ffe0db;
     color: #ff3626;
   }
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
 }

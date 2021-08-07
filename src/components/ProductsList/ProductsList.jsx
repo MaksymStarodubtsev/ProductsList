@@ -1,42 +1,51 @@
 import React from 'react';
 import './ProductsList.scss';
 
-export const ProductsList = ({ products }) => (
+export const ProductsList = ({ products, setselectedProductId, setProductInfo }) => (
   <div className="ProductsList">
-    {products.map(product => {
-      const { imageUrl, name, count, size, weight, comments } = product;
+    <div className="ProductsList__list-container">
+      <ul className="ProductsList__list">
+        {products.map(product => {
+          const { imageUrl, id, name, count, size, weight, comments } = product;
 
-      return (
-        <>
-          <h2>Product: {name}</h2>
-
-          <div className="ProductsList__list-container">
-            <ul className="ProductsList__list">
+          return (
+            <div className="ProductsList__card">
               <li className="ProductsList__item ProductsList__item--unchecked">
-                <label>
-                  <input type="checkbox" readOnly />
-                  <ul>
-                    <li>
-                      count-
-                      {count}
-                    </li>
-                    <li>
-                      size-
+                <table border="1">
+                  <tr>
+                    <td colSpan="2">
+                      <img
+                        src={imageUrl}
+                        alt={`product ${name}`}
+                        className="ProductsList__image"
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">{name}</th>
+                  </tr>
+                  <tr>
+                    <td>count</td>
+                    <td>{count}</td>
+                  </tr>
+                  <tr>
+                    <td>size</td>
+                    <td>
                       {size.width}
                       x
                       {size.height}
-                    </li>
-                    <li>
-                      weight-
-                      {weight}
-                    </li>
-                    <li>
-                      comments
-                      {comments.map(coment => <span>{coment}</span>)}
-                    </li>
-
-                  </ul>
-                </label>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>weight</td>
+                    <td>{weight}</td>
+                  </tr>
+                  <tr>
+                    <td>comments</td>
+                    <td>{comments.map(coment => <span>{coment}</span>)}</td>
+                  </tr>
+                </table>
 
                 {/* <button
                   className="
@@ -50,23 +59,23 @@ export const ProductsList = ({ products }) => (
                 </button> */}
               </li>
 
-              <li className="ProductsList__item ProductsList__item--checked">
-                <label>
-                  <input type="checkbox" checked readOnly />
-                  <p>distinctio vitae autem nihil ut molestias quo</p>
-                </label>
+              <div className="ProductsList__item ProductsList__item--checked">
 
                 <button
                   className="ProductsList__user-button button"
                   type="button"
+                  onClick={() => {
+                    setselectedProductId(id);
+                    setProductInfo(product);
+                  }}
                 >
-                  User&nbsp;#2
+                  Product&nbsp;{id}
                 </button>
-              </li>
-            </ul>
-          </div>
-        </>
-      );
-    })}
+              </div>
+            </div>
+          );
+        })}
+      </ul>
+    </div>
   </div>
 );

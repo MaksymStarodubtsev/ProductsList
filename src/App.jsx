@@ -1,35 +1,109 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
 import './App.scss';
 import './styles/general.scss';
 import { ProductsList } from './components/ProductsList';
 import { CurrentProduct } from './components/CurrentProduct';
-import productList from './components/api/products.json';
 
-class App extends React.Component {
-  state = {
-    products: [...productList],
-    selectedProductId: 0,
+export const App = () => {
+  const [products, setProducts] = useState(null);
+  const [comments, setComments] = useState(null);
+  const [productInfo, setProductInfo] = useState(null);
+  const [commentForProduct, setCommentsForProduct] = useState(null);
+  const [selectedProductId, setselectedProductId] = useState(0);
+
+  const PRODUCT_URL = 'https://api.jsonbin.io/b/610e7a3ad5667e403a3af3c8/2';
+  const COMMENT_URL = 'https://api.jsonbin.io/b/610e7bd4e1b0604017a847b0';
+
+  const getAllProducts = async() => {
+    const searchResult = await fetch(PRODUCT_URL)
+      .then(response => response.json())
+      .then(result => result.data);
+
+    setProducts(searchResult);
   };
 
-  render() {
-    const { products, selectedProductId } = this.state;
+  const getAllComments = async() => {
+    const searchResult = await fetch(COMMENT_URL)
+      .then(response => response.json())
+      .then(result => result);
 
-    return (
-      <div className="App">
-        <div className="App__sidebar">
-          <ProductsList products={products} />
-        </div>
+    setComments(searchResult);
+  };
 
-        <div className="App__content">
-          <div className="App__content-container">
-            {selectedProductId ? (
-              <CurrentProduct userId={selectedProductId} />
-            ) : 'No user selected'}
-          </div>
+  useEffect(() => {
+    Promise.all([
+      getAllProducts(),
+      getAllComments(),
+    ]);
+    console.log('mount', selectedProductId);
+
+    return () => {
+      console.log('Unmount');
+    };
+  }, []);
+
+  useEffect(() => {
+    if (comments) {
+      const productComments = comments.filter(comment => (
+        comment.productId === selectedProductId
+      ));
+
+      setCommentsForProduct(productComments);
+    }
+    console.log('update');
+  }, [products, selectedProductId]);
+
+  const productsSortBy = (sortBy) => {
+    setProducts(products.sort((prevProduct, nextProduct) => {
+      switch (sortBy) {
+        case 'name': {
+          return nextProduct.name.localeCompare(prevProduct.name);
+        }
+
+        default: {
+          return 0;
+        }
+      }
+    }));
+  };
+
+  // const productsSortByQuantity;
+
+  return (
+    <div className="App">
+      <div className="App__sidebar">
+        <button
+          type="submit"
+          onClick={() => {
+            productsSortBy('name');
+          }}
+        >
+          sort by name
+        </button>
+        {selectedProductId}
+        {comments ? 'yes' : 'no'}
+        { products
+          ? (
+            <ProductsList
+              products={products}
+              setselectedProductId={setselectedProductId}
+              setProductInfo={setProductInfo}
+            />
+          )
+          : 'Loading...'
+        }
+      </div>
+      <div className="App__content">
+        <div className="App__content-container">
+          {selectedProductId && productInfo && commentForProduct ? (
+            <CurrentProduct
+              productInfo={productInfo}
+              comments={commentForProduct}
+            />
+          ) : 'No product selected'}
         </div>
       </div>
-    );
-  }
-}
-
-export default App;
+    </div>
+  );
+};
