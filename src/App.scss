@@ -80,6 +80,13 @@ input[type="checkbox"]:checked + p:before {
     flex-basis: 60%;
   }
 
+  &__sort-button {
+    margin-left: 10px;
+    &--color-prime {
+      color: rgb(211, 87, 87);
+    }
+  }
+
   &__content {
     @extend %stretch-panel;
 

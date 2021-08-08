@@ -4,10 +4,12 @@ import './App.scss';
 import './styles/general.scss';
 import { ProductsList } from './components/ProductsList';
 import { CurrentProduct } from './components/CurrentProduct';
+import comentsFrom from './components/api/coments.json';
+import productsFrom from './components/api/products.json';
 
 export const App = () => {
-  const [products, setProducts] = useState(null);
-  const [comments, setComments] = useState(null);
+  const [products, setProducts] = useState(productsFrom);
+  const [comments, setComments] = useState(comentsFrom);
   const [productInfo, setProductInfo] = useState(null);
   const [commentForProduct, setCommentsForProduct] = useState(null);
   const [selectedProductId, setselectedProductId] = useState(0);
@@ -56,33 +58,75 @@ export const App = () => {
   }, [products, selectedProductId]);
 
   const productsSortBy = (sortBy) => {
-    setProducts(prevproducts => prevproducts.sort((prevProduct, nextProduct) => {
-      switch (sortBy) {
-        case 'name': {
-          return nextProduct.name.localeCompare(prevProduct.name);
-        }
+    setProducts(prevproducts => (
+      prevproducts.sort((prevProduct, nextProduct) => {
+        switch (sortBy) {
+          case 'name': {
+            return nextProduct.name.localeCompare(prevProduct.name);
+          }
 
-        default: {
-          return 0;
+          case 'quantity': {
+            return prevProduct.count - nextProduct.count;
+          }
+
+          case 'reverse': {
+            return nextProduct.count - prevProduct.count;
+          }
+
+          default: {
+            return 0;
+          }
         }
-      }
-    }));
-    setCountProdChange((prevCount => prevCount + 1));
+      })));
+    setCountProdChange(prevCount => prevCount + 1);
   };
 
   return (
     <div className="App">
       <div className="App__sidebar">
-        <button
-          type="submit"
-          onClick={() => {
-            productsSortBy('name');
-          }}
-        >
-          sort by name
-        </button>
-        {selectedProductId}
-        {comments ? 'yes' : 'no'}
+        { products
+          ? (
+            <>
+              <button
+                className="
+                  App__sort-button
+                  button
+                  App__sort-button--color-prime"
+                type="button"
+                onClick={() => {
+                  productsSortBy('name');
+                }}
+              >
+                sort by name
+              </button>
+              <button
+                className="
+                  App__sort-button
+                  button
+                  App__sort-button--color-prime"
+                type="button"
+                onClick={() => {
+                  productsSortBy('quantity');
+                }}
+              >
+                sort by quantity
+              </button>
+              <button
+                className="
+                  App__sort-button
+                  button
+                  App__sort-button--color-prime"
+                type="button"
+                onClick={() => {
+                  productsSortBy('reverse');
+                }}
+              >
+                sort by quantity
+              </button>
+            </>
+          )
+          : 'Loading...'
+        }
         { products
           ? (
             <ProductsList

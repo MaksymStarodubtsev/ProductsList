@@ -69,7 +69,7 @@ export const ProductsList = ({ products, setselectedProductId, setProductInfo })
                     setProductInfo(product);
                   }}
                 >
-                  Product&nbsp;{id}
+                  Edit &nbsp;{id}
                 </button>
               </div>
             </div>

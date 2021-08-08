@@ -3,7 +3,7 @@
     "id": 1,
     "imageUrl": "some url here",
     "name": "Apple",
-    "count": 4,
+    "count": 100,
     "size": {
       "width": 200,
       "height": 200
@@ -15,7 +15,7 @@
     "id": 2,
     "imageUrl": "some url here",
     "name": "Banana",
-    "count": 4,
+    "count": 150,
     "size": {
       "width": 200,
       "height": 200
@@ -27,7 +27,7 @@
     "id": 3,
     "imageUrl": "some url here",
     "name": "Apple",
-    "count": 4,
+    "count": 80,
     "size": {
       "width": 200,
       "height": 200
