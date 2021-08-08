@@ -11,6 +11,7 @@ export const App = () => {
   const [productInfo, setProductInfo] = useState(null);
   const [commentForProduct, setCommentsForProduct] = useState(null);
   const [selectedProductId, setselectedProductId] = useState(0);
+  const [prodStateChange, setCountProdChange] = useState(0);
 
   const PRODUCT_URL = 'https://api.jsonbin.io/b/610e7a3ad5667e403a3af3c8/2';
   const COMMENT_URL = 'https://api.jsonbin.io/b/610e7bd4e1b0604017a847b0';
@@ -55,7 +56,7 @@ export const App = () => {
   }, [products, selectedProductId]);
 
   const productsSortBy = (sortBy) => {
-    setProducts(products.sort((prevProduct, nextProduct) => {
+    setProducts(prevproducts => prevproducts.sort((prevProduct, nextProduct) => {
       switch (sortBy) {
         case 'name': {
           return nextProduct.name.localeCompare(prevProduct.name);
@@ -66,9 +67,8 @@ export const App = () => {
         }
       }
     }));
+    setCountProdChange((prevCount => prevCount + 1));
   };
-
-  // const productsSortByQuantity;
 
   return (
     <div className="App">
