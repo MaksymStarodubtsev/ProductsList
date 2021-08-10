@@ -1,35 +1,66 @@
 import React, { useState, useEffect } from 'react';
 import './CurrentProduct.scss';
 
-export const CurrentProduct = ({ productInfo, comments }) => {
+export const CurrentProduct = (
+  {
+    productInfo,
+    comments,
+    changeCurentProductsInList,
+    setselectedProductId,
+    setProductSelected,
+  },
+) => {
   const { imageUrl, id, name, count, size, weight } = productInfo;
-
-  const [productEditingInfo, setProductEditingInfo] = useState('');
 
   const [imageUrlEditingInfo, setImageUrlEditingInfo] = useState('');
   const [idEditingInfo, setIdEditingInfo] = useState('');
   const [nameEditingInfo, setNameEditingInfo] = useState('');
   const [countEditingInfo, setCountEditingInfo] = useState('');
-  const [sizeEditingInfo, setSizeEditingInfo] = useState('');
+
+  const [sizeWidthEditingInfo, setSizeWidthEditingInfo] = useState('');
+  const [sizeHeightEditingInfo, setSizeHeightEditingInfo] = useState('');
+
   const [weightEditingInfo, setWeightEditingInfo] = useState('');
 
-  useEffect(() => {
-    const sizeWidthHeight = `${size.width} x ${size.height}`;
+  const [newProductToList, setNewProductToList] = useState({});
 
+  useEffect(() => {
     setImageUrlEditingInfo(imageUrl);
     setIdEditingInfo(id);
     setNameEditingInfo(name);
     setCountEditingInfo(count);
-    setSizeEditingInfo(sizeWidthHeight);
-    setWeightEditingInfo(weight);
-    console.log('mount');
 
+    setSizeWidthEditingInfo(size.width);
+    setSizeHeightEditingInfo(size.height);
+
+    setWeightEditingInfo(weight);
   }, [productInfo]);
+
+  useEffect(() => {
+    if (newProductToList.size !== undefined) {
+      changeCurentProductsInList(newProductToList, id);
+    }
+  }, [newProductToList]);
 
   return (
     <div className="ProductsList__card">
       <li className="ProductsList__item ProductsList__item--unchecked">
-        <form>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            setNewProductToList({
+              imageUrl: imageUrlEditingInfo,
+              id: idEditingInfo,
+              name: nameEditingInfo,
+              count: countEditingInfo,
+              size: {
+                width: sizeWidthEditingInfo,
+                height: sizeHeightEditingInfo,
+              },
+              weight: weightEditingInfo,
+            });
+          }}
+        >
           <table border="1">
             <tr>
               <td colSpan="2">
@@ -44,6 +75,7 @@ export const CurrentProduct = ({ productInfo, comments }) => {
               <th scope="col">Product</th>
               <th scope="col">
                 <input
+                  required
                   type="text"
                   onChange={(event) => setNameEditingInfo(event.target.value)}
                   value={nameEditingInfo}
@@ -54,8 +86,10 @@ export const CurrentProduct = ({ productInfo, comments }) => {
               <td>count</td>
               <td>
                 <input
-                  type="text"
-                  onChange={(event) => setCountEditingInfo(event.target.value)}
+                  required
+                  type="number"
+                  onChange={event => setCountEditingInfo(event.target.value)
+                  }
                   value={countEditingInfo}
                 />
               </td>
@@ -64,9 +98,22 @@ export const CurrentProduct = ({ productInfo, comments }) => {
               <td>size</td>
               <td>
                 <input
-                  type="text"
-                  onChange={(event) => setSizeEditingInfo(event.target.value)}
-                  value={sizeEditingInfo}
+                  required
+                  type="number"
+                  placeholder="Width"
+                  onChange={(event) => (
+                    setSizeWidthEditingInfo(event.target.value)
+                  )}
+                  value={sizeWidthEditingInfo}
+                />
+                <input
+                  required
+                  type="number"
+                  placeholder="Height"
+                  onChange={(event) => (
+                    setSizeHeightEditingInfo(event.target.value)
+                  )}
+                  value={sizeHeightEditingInfo}
                 />
               </td>
             </tr>
@@ -82,16 +129,31 @@ export const CurrentProduct = ({ productInfo, comments }) => {
               </td>
             </tr>
           </table>
-          <button
-            className="
+          <div className="CurrentProduct__user-button-container">
+            <button
+              className="
                   ProductsList__user-button
                   ProductsList__user-button--selected
                   button
                 "
-            type="button"
-          >
-            Change Products
-          </button>
+              type="submit"
+            >
+              Change
+            </button>
+
+            <button
+              onClick={() => setProductSelected(false)}
+              className="
+                  ProductsList__user-button
+                  ProductsList__user-button--selected
+                  button
+                "
+              type="button"
+            >
+              Cancel
+            </button>
+
+          </div>
         </form>
         {/* <button
       className="

@@ -8,12 +8,12 @@ import comentsFrom from './components/api/coments.json';
 import productsFrom from './components/api/products.json';
 
 export const App = () => {
-  const [products, setProducts] = useState(productsFrom);
-  const [comments, setComments] = useState(comentsFrom);
+  const [products, setProducts] = useState('');
+  const [comments, setComments] = useState('');
   const [productInfo, setProductInfo] = useState(null);
   const [commentForProduct, setCommentsForProduct] = useState(null);
   const [selectedProductId, setselectedProductId] = useState(0);
-  const [prodStateChange, setCountProdChange] = useState(0);
+  const [productSelected, setProductSelected] = useState(false);
 
   const PRODUCT_URL = 'https://api.jsonbin.io/b/610e7a3ad5667e403a3af3c8/2';
   const COMMENT_URL = 'https://api.jsonbin.io/b/610e7bd4e1b0604017a847b0';
@@ -59,7 +59,7 @@ export const App = () => {
 
   const productsSortBy = (sortBy) => {
     setProducts(prevproducts => (
-      prevproducts.sort((prevProduct, nextProduct) => {
+      [...prevproducts].sort((prevProduct, nextProduct) => {
         switch (sortBy) {
           case 'name': {
             return nextProduct.name.localeCompare(prevProduct.name);
@@ -78,7 +78,20 @@ export const App = () => {
           }
         }
       })));
-    setCountProdChange(prevCount => prevCount + 1);
+  };
+
+  const changeCurentProductsInList
+  = (productThatChange, productThatChangeId) => {
+    setProducts(prevproducts => (
+      [...prevproducts].map(product => {
+        if (product.id === productThatChangeId) {
+          productThatChange.comments = product.comments;
+          setselectedProductId(0);
+          return productThatChange;
+        }
+
+        return product;
+      })));
   };
 
   return (
@@ -130,6 +143,7 @@ export const App = () => {
         { products
           ? (
             <ProductsList
+              setProductSelected={setProductSelected}
               products={products}
               setselectedProductId={setselectedProductId}
               setProductInfo={setProductInfo}
@@ -140,8 +154,10 @@ export const App = () => {
       </div>
       <div className="App__content">
         <div className="App__content-container">
-          {selectedProductId && productInfo && commentForProduct ? (
+          {selectedProductId && productSelected && productInfo && commentForProduct ? (
             <CurrentProduct
+              setProductSelected={setProductSelected}
+              changeCurentProductsInList={changeCurentProductsInList}
               productInfo={productInfo}
               comments={commentForProduct}
             />

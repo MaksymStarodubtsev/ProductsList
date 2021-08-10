@@ -1,7 +1,7 @@
 import React from 'react';
 import './ProductsList.scss';
 
-export const ProductsList = ({ products, setselectedProductId, setProductInfo }) => (
+export const ProductsList = ({ products, setselectedProductId, setProductInfo, setProductSelected }) => (
   <div className="ProductsList">
     <div className="ProductsList__list-container">
       <ul className="ProductsList__list">
@@ -9,7 +9,7 @@ export const ProductsList = ({ products, setselectedProductId, setProductInfo })
           const { imageUrl, id, name, count, size, weight, comments } = product;
 
           return (
-            <div className="ProductsList__card">
+            <div key={id} className="ProductsList__card">
               <li className="ProductsList__item ProductsList__item--unchecked">
                 <table border="1">
                   <tr>
@@ -65,6 +65,7 @@ export const ProductsList = ({ products, setselectedProductId, setProductInfo })
                   className="ProductsList__user-button button"
                   type="button"
                   onClick={() => {
+                    setProductSelected(true);
                     setselectedProductId(id);
                     setProductInfo(product);
                   }}
