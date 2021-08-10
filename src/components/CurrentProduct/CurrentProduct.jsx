@@ -23,7 +23,8 @@ export const CurrentProduct = ({ productInfo, comments }) => {
     setSizeEditingInfo(sizeWidthHeight);
     setWeightEditingInfo(weight);
     console.log('mount');
-  }, []);
+
+  }, [productInfo]);
 
   return (
     <div className="ProductsList__card">

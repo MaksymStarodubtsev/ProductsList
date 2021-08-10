@@ -70,7 +70,7 @@ export const App = () => {
           }
 
           case 'reverse': {
-            return nextProduct.count - prevProduct.count;
+            return prevProduct.name.localeCompare(nextProduct.name);
           }
 
           default: {
@@ -121,7 +121,7 @@ export const App = () => {
                   productsSortBy('reverse');
                 }}
               >
-                sort by quantity
+                sort by name reverse
               </button>
             </>
           )
