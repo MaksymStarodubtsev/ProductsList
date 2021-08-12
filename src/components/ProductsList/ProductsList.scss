@@ -1,6 +1,11 @@
 .ProductsList {
   width: 100%;
 
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   &__user-button--selected {
     background-color: #4d457b;
   }
@@ -9,15 +14,16 @@
     margin: 10px;
   }
 
-  &__image {
+  &__photo {
     position: relative;
-    object-fit: cover;
+    object-fit: contain;
     width: 100%;
     max-width: 268px;
     height: 268px;
+    z-index: 1;
+    transition: transform 1s ease-in-out;
     &:hover {
-      transform: scale(1.2);
-      transition: transform 2s ease-in-out;
+      transform: scale(1.1);
     }
   }
 
@@ -31,7 +37,8 @@
     flex-wrap: wrap;
     justify-content: space-between;
     list-style: none;
-    padding-left: 5px;
+    padding-top: 10px;
+    gap: 10px;
   }
 
   &__item {
