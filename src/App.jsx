@@ -147,7 +147,7 @@ export const App = () => {
               products={products}
               setselectedProductId={setselectedProductId}
               setProductInfo={setProductInfo}
-              comments={commentForProduct}
+              commentsWithData={comments}
             />
           )
           : 'Loading...'

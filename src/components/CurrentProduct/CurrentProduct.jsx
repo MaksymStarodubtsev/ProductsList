@@ -61,7 +61,77 @@ export const CurrentProduct = (
             });
           }}
         >
-          <table border="1">
+          <div className="ProductList__container d-flex flex-row flex-wrap justify-content-center">
+
+            <div className="card" style={{ width: '18rem' }}>
+              <div className="ProductsList__photo-container">
+                <img src={imageUrl} className="card-img-top ProductsList__photo" alt="" />
+              </div>
+              <div className="card-body">
+                <h5 className="card-title">
+                  <input
+                    required
+                    className="form-control"
+                    type="text"
+                    onChange={(event) => setNameEditingInfo(event.target.value)}
+                    value={nameEditingInfo}
+                  />
+                </h5>
+                <p className="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card s content.
+                </p>
+              </div>
+              <ul className="list-group list-group-flush">
+                <li className="list-group-item">
+                  <input
+                    required
+                    className="form-control"
+                    type="number"
+                    onChange={event => setCountEditingInfo(event.target.value)
+                    }
+                    value={countEditingInfo}
+                  />
+                </li>
+                <li className="list-group-item">
+                  <input
+                    required
+                    className="form-control"
+                    type="number"
+                    placeholder="Width"
+                    onChange={(event) => (
+                      setSizeWidthEditingInfo(event.target.value)
+                    )}
+                    value={sizeWidthEditingInfo}
+                  />
+                </li>
+                <li className="list-group-item">
+                  <input
+                    required
+                    className="form-control"
+                    type="number"
+                    placeholder="Height"
+                    onChange={(event) => (
+                      setSizeHeightEditingInfo(event.target.value)
+                    )}
+                    value={sizeHeightEditingInfo}
+                  />
+                </li>
+                <li className="list-group-item">
+                  <input
+                    className="form-control"
+                    type="text"
+                    onChange={(event) => setWeightEditingInfo(event.target.value)}
+                    value={weightEditingInfo}
+                  />
+                </li>
+                <li className="list-group-item">A third item</li>
+              </ul>
+            </div>
+
+          </div>
+
+          {/* <table border="1">
             <tr>
               <td colSpan="2">
                 <img
@@ -128,13 +198,11 @@ export const CurrentProduct = (
                 />
               </td>
             </tr>
-          </table>
+          </table> */}
           <div className="CurrentProduct__user-button-container">
             <button
               className="
-                  ProductsList__user-button
-                  ProductsList__user-button--selected
-                  button
+              btn btn-outline-success
                 "
               type="submit"
             >
@@ -144,9 +212,7 @@ export const CurrentProduct = (
             <button
               onClick={() => setProductSelected(false)}
               className="
-                  ProductsList__user-button
-                  ProductsList__user-button--selected
-                  button
+              btn btn-outline-warning
                 "
               type="button"
             >
@@ -155,16 +221,6 @@ export const CurrentProduct = (
 
           </div>
         </form>
-        {/* <button
-      className="
-                  ProductsList__user-button
-                  ProductsList__user-button--selected
-                  button
-                "
-      type="button"
-    >
-      User&nbsp;#1
-    </button> */}
       </li>
 
       <div className="ProductsList__item ProductsList__item--checked">
@@ -172,7 +228,7 @@ export const CurrentProduct = (
           <h3>Comments</h3>
           <ul>
             {comments.map(coment => (
-              <li>{coment.description}</li>
+              <li>{coment.description}{coment.date }</li>
             ))}
           </ul>
         </div>

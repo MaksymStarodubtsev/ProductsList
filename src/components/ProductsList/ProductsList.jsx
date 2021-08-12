@@ -1,7 +1,7 @@
 import React from 'react';
 import './ProductsList.scss';
 
-export const ProductsList = ({ products, setselectedProductId, setProductInfo, setProductSelected, comments }) => (
+export const ProductsList = ({ products, setselectedProductId, setProductInfo, setProductSelected }) => (
   <div>
     <div>
       <ul className="ProductsList__list">
@@ -9,7 +9,7 @@ export const ProductsList = ({ products, setselectedProductId, setProductInfo, s
           const { imageUrl, id, name, count, size, weight, comments } = product;
 
           return (
-            <div className="ProductList__container d-flex flex-row flex-wrap justify-content-between">
+            <div className="ProductList__container d-flex flex-row flex-wrap">
 
             <div className="card" style={{ width: '18rem' }}>
               <div className="ProductsList__photo-container">
@@ -21,9 +21,6 @@ export const ProductsList = ({ products, setselectedProductId, setProductInfo, s
                   Some quick example text to build on the card title and make up
                   the bulk of the card s content.
                 </p>
-                {/* {comments.map(coment => (
-                  <p>{coment.description}</p>
-                ))} */}
               </div>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">An item</li>
@@ -31,8 +28,17 @@ export const ProductsList = ({ products, setselectedProductId, setProductInfo, s
                 <li className="list-group-item">A third item</li>
               </ul>
               <div className="card-body">
-                <a href="#about" className="card-link">Card link</a>
-                <a href="#home" className="card-link">Another link</a>
+                <button
+                  className="btn btn-outline-primary"
+                  type="button"
+                  onClick={() => {
+                    setProductSelected(true);
+                    setselectedProductId(id);
+                    setProductInfo(product);
+                  }}
+                >
+                  Edit &nbsp;{id}
+                </button>
               </div>
             </div>
 
