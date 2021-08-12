@@ -10,10 +10,20 @@
   }
 
   &__image {
+    position: relative;
     object-fit: cover;
     width: 100%;
     max-width: 268px;
     height: 268px;
+    &:hover {
+      transform: scale(1.2);
+      transition: transform 2s ease-in-out;
+    }
+  }
+
+  &__photo-container {
+    position: relative;
+    overflow: hidden;
   }
 
   &__list {

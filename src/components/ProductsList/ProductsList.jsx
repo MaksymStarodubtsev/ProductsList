@@ -13,7 +13,7 @@ export const ProductsList = ({ products, setselectedProductId, setProductInfo, s
               <li className="ProductsList__item ProductsList__item--unchecked">
                 <table border="1">
                   <tr>
-                    <td colSpan="2">
+                    <td colSpan="2" className="ProductsList__photo-container">
                       <img
                         src={imageUrl}
                         alt={`product ${name}`}
