@@ -130,75 +130,6 @@ export const CurrentProduct = (
             </div>
 
           </div>
-
-          {/* <table border="1">
-            <tr>
-              <td colSpan="2">
-                <img
-                  src={imageUrl}
-                  alt={`product ${name}`}
-                  className="ProductsList__image"
-                />
-              </td>
-            </tr>
-            <tr>
-              <th scope="col">Product</th>
-              <th scope="col">
-                <input
-                  required
-                  type="text"
-                  onChange={(event) => setNameEditingInfo(event.target.value)}
-                  value={nameEditingInfo}
-                />
-              </th>
-            </tr>
-            <tr>
-              <td>count</td>
-              <td>
-                <input
-                  required
-                  type="number"
-                  onChange={event => setCountEditingInfo(event.target.value)
-                  }
-                  value={countEditingInfo}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>size</td>
-              <td>
-                <input
-                  required
-                  type="number"
-                  placeholder="Width"
-                  onChange={(event) => (
-                    setSizeWidthEditingInfo(event.target.value)
-                  )}
-                  value={sizeWidthEditingInfo}
-                />
-                <input
-                  required
-                  type="number"
-                  placeholder="Height"
-                  onChange={(event) => (
-                    setSizeHeightEditingInfo(event.target.value)
-                  )}
-                  value={sizeHeightEditingInfo}
-                />
-              </td>
-            </tr>
-            <tr>
-              <td>weight</td>
-
-              <td>
-                <input
-                  type="text"
-                  onChange={(event) => setWeightEditingInfo(event.target.value)}
-                  value={weightEditingInfo}
-                />
-              </td>
-            </tr>
-          </table> */}
           <div className="CurrentProduct__user-button-container">
             <button
               className="
@@ -228,7 +159,7 @@ export const CurrentProduct = (
           <h3>Comments</h3>
           <ul>
             {comments.map(coment => (
-              <li>{coment.description}{coment.date }</li>
+              <li>{coment.description} : {coment.date }</li>
             ))}
           </ul>
         </div>

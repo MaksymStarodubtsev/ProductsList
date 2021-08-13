@@ -4,8 +4,6 @@ import './App.scss';
 import './styles/general.scss';
 import { ProductsList } from './components/ProductsList';
 import { CurrentProduct } from './components/CurrentProduct';
-import comentsFrom from './components/api/coments.json';
-import productsFrom from './components/api/products.json';
 
 export const App = () => {
   const [products, setProducts] = useState('');
@@ -99,12 +97,9 @@ export const App = () => {
       <div className="App__sidebar">
         { products
           ? (
-            <>
+            <div className="App__buttons-container">
               <button
-                className="
-                  App__sort-button
-                  button
-                  App__sort-button--color-prime"
+                className="btn btn-secondary"
                 type="button"
                 onClick={() => {
                   productsSortBy('name');
@@ -113,10 +108,7 @@ export const App = () => {
                 sort by name
               </button>
               <button
-                className="
-                  App__sort-button
-                  button
-                  App__sort-button--color-prime"
+                className="btn btn-secondary"
                 type="button"
                 onClick={() => {
                   productsSortBy('quantity');
@@ -125,10 +117,7 @@ export const App = () => {
                 sort by quantity
               </button>
               <button
-                className="
-                  App__sort-button
-                  button
-                  App__sort-button--color-prime"
+                className="btn btn-secondary"
                 type="button"
                 onClick={() => {
                   productsSortBy('reverse');
@@ -136,9 +125,14 @@ export const App = () => {
               >
                 sort by name reverse
               </button>
-            </>
+            </div>
           )
-          : 'Loading...'
+          : (
+            <div
+              className="spinner-border text-primary"
+              role="status"
+            />
+          )
         }
         { products
           ? (
@@ -150,7 +144,7 @@ export const App = () => {
               commentsWithData={comments}
             />
           )
-          : 'Loading...'
+          : '   Loading...'
         }
       </div>
       <div className="App__content">

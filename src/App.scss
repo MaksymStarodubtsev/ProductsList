@@ -87,6 +87,12 @@ input[type="checkbox"]:checked + p:before {
     }
   }
 
+  &__buttons-container {
+    margin-left: 2rem;
+    display: flex;
+    gap: 10px;
+  }
+
   &__content {
     @extend %stretch-panel;
 
