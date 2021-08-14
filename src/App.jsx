@@ -92,6 +92,18 @@ export const App = () => {
       })));
   };
 
+  const addNewProductToList = (newProductInfo) => {
+    setProducts((prevProducts) => {
+      const id = prevProducts.length + 1;
+
+      newProductInfo.id = id;
+
+      return (
+        [...prevProducts, newProductInfo]
+      );
+    });
+  };
+
   return (
     <div className="App">
       <div className="App__sidebar">
@@ -149,14 +161,17 @@ export const App = () => {
       </div>
       <div className="App__content">
         <div className="App__content-container">
-          {selectedProductId && productSelected && productInfo && commentForProduct ? (
-            <CurrentProduct
-              setProductSelected={setProductSelected}
-              changeCurentProductsInList={changeCurentProductsInList}
-              productInfo={productInfo}
-              comments={commentForProduct}
-            />
-          ) : 'No product selected'}
+          {
+            productSelected ? (
+              <CurrentProduct
+               addNewProductToList={addNewProductToList}
+                setProductSelected={setProductSelected}
+                changeCurentProductsInList={changeCurentProductsInList}
+                productInfo={productInfo}
+                comments={commentForProduct}
+              />
+            ) : 'No product selected'
+          }
         </div>
       </div>
     </div>

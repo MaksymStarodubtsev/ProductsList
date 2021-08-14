@@ -3,10 +3,10 @@ import './CurrentProduct.scss';
 
 export const CurrentProduct = (
   {
+    addNewProductToList,
     productInfo,
     comments,
     changeCurentProductsInList,
-    setselectedProductId,
     setProductSelected,
   },
 ) => {
@@ -39,6 +39,7 @@ export const CurrentProduct = (
   useEffect(() => {
     if (newProductToList.size !== undefined) {
       changeCurentProductsInList(newProductToList, id);
+      setProductSelected(false);
     }
   }, [newProductToList]);
 
@@ -61,11 +62,20 @@ export const CurrentProduct = (
             });
           }}
         >
-          <div className="ProductList__container d-flex flex-row flex-wrap justify-content-center">
-
+          <div className="
+            ProductList__container
+            d-flex
+            flex-row
+            flex-wrap
+            justify-content-center"
+          >
             <div className="card" style={{ width: '18rem' }}>
               <div className="ProductsList__photo-container">
-                <img src={imageUrl} className="card-img-top ProductsList__photo" alt="" />
+                <img
+                  src={imageUrl}
+                  className="card-img-top ProductsList__photo"
+                  alt={`Product-${name}`}
+                />
               </div>
               <div className="card-body">
                 <h5 className="card-title">
@@ -73,7 +83,7 @@ export const CurrentProduct = (
                     required
                     className="form-control"
                     type="text"
-                    onChange={(event) => setNameEditingInfo(event.target.value)}
+                    onChange={event => setNameEditingInfo(event.target.value)}
                     value={nameEditingInfo}
                   />
                 </h5>
@@ -81,8 +91,20 @@ export const CurrentProduct = (
                   Product description
                 </p>
               </div>
-              <ul className="list-group list-group-flush">
-                <li className="list-group-item">
+              <ul className="list-group list-group-flush align-items-end">
+                <li className="input-group mb-3">
+                  <span className="input-group-text" id="basic-addon2">url</span>
+                  <input
+                    required
+                    className="form-control"
+                    type="text"
+                    onChange={event => setImageUrlEditingInfo(event.target.value)
+                    }
+                    value={imageUrlEditingInfo}
+                  />
+                </li>
+                <li className="input-group mb-3">
+                  <span className="input-group-text" id="basic-addon2">count</span>
                   <input
                     required
                     className="form-control"
@@ -92,44 +114,70 @@ export const CurrentProduct = (
                     value={countEditingInfo}
                   />
                 </li>
-                <li className="list-group-item">
+                <li className="input-group mb-3">
+                  <span className="input-group-text" id="basic-addon2">width</span>
                   <input
                     required
                     className="form-control"
                     type="number"
                     placeholder="Width"
-                    onChange={(event) => (
+                    onChange={event => (
                       setSizeWidthEditingInfo(event.target.value)
                     )}
                     value={sizeWidthEditingInfo}
                   />
                 </li>
-                <li className="list-group-item">
+                <li className="input-group mb-3">
+                  <span class="input-group-text" id="basic-addon2">height</span>
                   <input
                     required
                     className="form-control"
                     type="number"
                     placeholder="Height"
-                    onChange={(event) => (
+                    onChange={event => (
                       setSizeHeightEditingInfo(event.target.value)
                     )}
                     value={sizeHeightEditingInfo}
                   />
                 </li>
-                <li className="list-group-item">
+                <li className="input-group mb-0 ">
+                  <span class="input-group-text" id="basic-addon2">weight</span>
                   <input
                     className="form-control"
                     type="text"
-                    onChange={(event) => setWeightEditingInfo(event.target.value)}
+                    onChange={event => setWeightEditingInfo(event.target.value)}
                     value={weightEditingInfo}
                   />
                 </li>
-                <li className="list-group-item">A third item</li>
               </ul>
             </div>
 
           </div>
           <div className="CurrentProduct__user-button-container">
+
+            <button
+              onClick={() => {
+                addNewProductToList({
+                  imageUrl: imageUrlEditingInfo,
+                  id: idEditingInfo,
+                  name: nameEditingInfo,
+                  count: countEditingInfo,
+                  size: {
+                    width: sizeWidthEditingInfo,
+                    height: sizeHeightEditingInfo,
+                  },
+                  weight: weightEditingInfo,
+                });
+                setProductSelected(false);
+              }}
+              className="
+              btn btn-outline-primary
+                "
+              type="button"
+            >
+              add
+            </button>
+
             <button
               className="
               btn btn-outline-success
@@ -142,8 +190,7 @@ export const CurrentProduct = (
             <button
               onClick={() => setProductSelected(false)}
               className="
-              btn btn-outline-warning
-                "
+              btn btn-outline-warning"
               type="button"
             >
               Cancel
@@ -157,9 +204,16 @@ export const CurrentProduct = (
         <div>
           <h3>Comments</h3>
           <ul>
-            {comments.map(coment => (
-              <li>{coment.description} : {coment.date }</li>
-            ))}
+            { comments
+              ? (comments.map(coment => (
+                <li>
+                  {coment.description}
+                  :
+                  {coment.date}
+                </li>
+              )))
+              : 'lol'
+            }
           </ul>
         </div>
       </div>
