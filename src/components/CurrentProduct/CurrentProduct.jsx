@@ -212,7 +212,7 @@ export const CurrentProduct = (
                   {coment.date}
                 </li>
               )))
-              : 'lol'
+              : 'no product selected'
             }
           </ul>
         </div>

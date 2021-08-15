@@ -14,7 +14,15 @@ export const ProductsList = (
       <div>
         <ul className="ProductsList__list">
           {products.map((product, index) => {
-            const { imageUrl, id, name, count, size, weight, comments } = product;
+            const {
+              imageUrl,
+              id,
+              name,
+              count,
+              size,
+              weight,
+              comments
+            } = product;
 
             return (
               <div className="ProductList__container d-flex flex-row flex-wrap">
