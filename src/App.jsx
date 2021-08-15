@@ -104,6 +104,12 @@ export const App = () => {
     });
   };
 
+  const deleteProductFromList = (productId) => {
+    setProducts(prevListOfProduct => (
+      [...prevListOfProduct].filter(product => product.id !== productId)
+    ));
+  };
+
   return (
     <div className="App">
       <div className="App__sidebar">
@@ -149,6 +155,7 @@ export const App = () => {
         { products
           ? (
             <ProductsList
+              deleteProductFromList={deleteProductFromList}
               setProductSelected={setProductSelected}
               products={products}
               setselectedProductId={setselectedProductId}
