@@ -6,6 +6,7 @@ The application is created for users and suppliers of products.
 ## Description
 
 The application is easy to use, with a clear user interface and rich functionality.
+Application takes data from a remote server, and displays available products
 
 ## Local development
 
@@ -19,9 +20,8 @@ The application is easy to use, with a clear user interface and rich functionali
 * Fork and clone this repository
 * Run `npm install` in your terminal
 * Run `npm start`
-* ... (maybe, you would have to add something more for this instruction)
 
 ## Troubleshooting
 
 Any advise for common problems or issues.
-For any contributing or problem solving you could find me [here]() and [here]()
+For any contributing or problem solving you could find me [here](https://www.linkedin.com/in/maksym-starodubtsev-a70399205/)
