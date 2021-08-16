@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import './CurrentProduct.scss';
 
 export const CurrentProduct = (
@@ -93,18 +94,29 @@ export const CurrentProduct = (
               </div>
               <ul className="list-group list-group-flush align-items-end">
                 <li className="input-group mb-3">
-                  <span className="input-group-text" id="basic-addon2">url</span>
+                  <span
+                    className="input-group-text"
+                    id="basic-addon2"
+                  >
+                    url
+                  </span>
                   <input
                     required
                     className="form-control"
                     type="text"
-                    onChange={event => setImageUrlEditingInfo(event.target.value)
+                    onChange={
+                      event => setImageUrlEditingInfo(event.target.value)
                     }
                     value={imageUrlEditingInfo}
                   />
                 </li>
                 <li className="input-group mb-3">
-                  <span className="input-group-text" id="basic-addon2">count</span>
+                  <span
+                    className="input-group-text"
+                    id="basic-addon2"
+                  >
+                    count
+                  </span>
                   <input
                     required
                     className="form-control"
@@ -115,7 +127,12 @@ export const CurrentProduct = (
                   />
                 </li>
                 <li className="input-group mb-3">
-                  <span className="input-group-text" id="basic-addon2">width</span>
+                  <span
+                    className="input-group-text"
+                    id="basic-addon2"
+                  >
+                    width
+                  </span>
                   <input
                     required
                     className="form-control"
@@ -128,7 +145,12 @@ export const CurrentProduct = (
                   />
                 </li>
                 <li className="input-group mb-3">
-                  <span class="input-group-text" id="basic-addon2">height</span>
+                  <span
+                    className="input-group-text"
+                    id="basic-addon2"
+                  >
+                    height
+                  </span>
                   <input
                     required
                     className="form-control"
@@ -141,7 +163,12 @@ export const CurrentProduct = (
                   />
                 </li>
                 <li className="input-group mb-0 ">
-                  <span class="input-group-text" id="basic-addon2">weight</span>
+                  <span
+                    className="input-group-text"
+                    id="basic-addon2"
+                  >
+                    weight
+                  </span>
                   <input
                     className="form-control"
                     type="text"
@@ -219,4 +246,29 @@ export const CurrentProduct = (
       </div>
     </div>
   );
+};
+
+CurrentProduct.propTypes = {
+  addNewProductToList: PropTypes.func.isRequired,
+  changeCurentProductsInList: PropTypes.func.isRequired,
+  setProductSelected: PropTypes.func.isRequired,
+  productInfo: PropTypes.arrayOf(
+    PropTypes.shape({
+      imageUrl: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      count: PropTypes.number.isRequired,
+      size: PropTypes.shape({
+        width: PropTypes.number.isRequired,
+        height: PropTypes.number.isRequired,
+      }),
+      weight: PropTypes.number.isRequired,
+    }).isRequired,
+  ).isRequired,
+  comments: PropTypes.arrayOf(
+    PropTypes.shape({
+      description: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
 };

@@ -37,10 +37,8 @@ export const App = () => {
       getAllProducts(),
       getAllComments(),
     ]);
-    console.log('mount', selectedProductId);
 
     return () => {
-      console.log('Unmount');
     };
   }, []);
 
@@ -52,7 +50,6 @@ export const App = () => {
 
       setCommentsForProduct(productComments);
     }
-    console.log('update');
   }, [products, selectedProductId]);
 
   const productsSortBy = (sortBy) => {
@@ -171,7 +168,7 @@ export const App = () => {
           {
             productSelected ? (
               <CurrentProduct
-               addNewProductToList={addNewProductToList}
+                addNewProductToList={addNewProductToList}
                 setProductSelected={setProductSelected}
                 changeCurentProductsInList={changeCurentProductsInList}
                 productInfo={productInfo}
