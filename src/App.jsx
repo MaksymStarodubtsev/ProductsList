@@ -78,10 +78,12 @@ export const App = () => {
   const changeCurentProductsInList
   = (productThatChange, productThatChangeId) => {
     setProducts(prevproducts => (
-      [...prevproducts].map(product => {
+      [...prevproducts].map((product) => {
         if (product.id === productThatChangeId) {
+
           productThatChange.comments = product.comments;
           setselectedProductId(0);
+
           return productThatChange;
         }
 

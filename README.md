@@ -1,7 +1,7 @@
 # Project Title
 
 The application is created for users and suppliers of products.
-- [DEMO LINK](https://maksymstarodubtsev.github.io/ProductsList/)()
+- [DEMO LINK](https://maksymstarodubtsev.github.io/ProductsList/)
 
 ## Description
 
